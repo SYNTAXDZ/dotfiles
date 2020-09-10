@@ -27,20 +27,23 @@ font xft:URWGothic-Book 11
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec terminal
+#bindsym $mod+Return exec terminal
+bindsym $mod+Return exec alacritty
 
 # Apps to Launch with SUPER + SHIFT + KEYPAD 1..9
-bindsym $mod+Shift+KP_1 exec terminal -e htop
-bindsym $mod+Shift+KP_9 exec terminal -e vim /home/syntax/.i3/config
+#bindsym $mod+Ctrl+h exec alacritty -e htop
+bindsym $mod+Ctrl+c exec alacritty -e nvim /home/syntax/.i3/config
+#bindsym $mod+Ctrl+k --release exec --no-startup-id xkill
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id dmenu_recency
-bindsym $mod+Shift+d exec jgmenu_run
+bindsym $mod+d exec --no-startup-id "rofi -show drun"
+
 # launch categorized menu
-bindsym $mod+z exec --no-startup-id morc_menu
+bindsym $mod+z exec jgmenu_run
+#bindsym $mod+z exec --no-startup-id morc_menu
 
 ################################################################################################
 ## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
@@ -59,15 +62,15 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
 # Start Applications
-bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
-bindsym $mod+F1 exec firefox
-bindsym $mod+Shift+F1 exec qutebrowser
-bindsym $mod+F2 exec emacs
-bindsym $mod+Shift+F2 exec code
-bindsym $mod+F3 exec pcmanfm
-bindsym $mod+Ctrl+F3 exec ranger
-bindsym $mod+Shift+F3 exec pcmanfm_pkexec
-bindsym $mod+F4 exec blender
+#bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
+#bindsym $mod+F1 exec firefox
+#bindsym $mod+Shift+F1 exec qutebrowser
+#bindsym $mod+F2 exec emacs
+#bindsym $mod+Shift+F2 exec code
+#bindsym $mod+F3 exec blender
+#bindsym $mod+F4 exec pcmanfm
+#bindsym $mod+Ctrl+F4 exec ranger
+#bindsym $mod+Shift+F4 exec pcmanfm_pkexec
 bindsym $mod+F5 exec terminal -e 'mocp'
 bindsym $mod+t exec --no-startup-id pkill compton
 bindsym $mod+Ctrl+t exec --no-startup-id compton -b
@@ -77,9 +80,18 @@ bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+bindsym $mod+Tab exec rofi -show window
 
+bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
+bindsym $mod+w exec firefox
+bindsym $mod+Shift+w exec qutebrowser
+bindsym $mod+e exec emacs
+#bindsym $mod+Shift+e exec code
+bindsym $mod+b exec blender
+bindsym $mod+f exec pcmanfm
+bindsym $mod+Ctrl+f exec ranger
+#bindsym $mod+Shift+f exec pcmanfm_pkexec
 # start at startup
-#exec_always --no-startup-id " killall polybar; /.config/polybar/launch.sh"
 # focus_follows_mouse no
 
 #---------------------------keyboard layout Switch-----------------------#
@@ -87,8 +99,8 @@ bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 #bindsym $mod+k exec setxkbmap fr
 #bindsym $Mod4+g exec setxkbmap us
 ######################## YOU SHOULD RUN THESE COMMANDS TO SET YOUR LAYOUT AND SWITCH IT #####################
-exec_always --no-startup-id  "setxkbmap -layout fr,us"
-exec_always --no-startup-id  "setxkbmap -option 'grp:alt_shift_toggle'"
+exec_always --no-startup-id "setxkbmap -layout fr,us"
+exec_always --no-startup-id "setxkbmap -option 'grp:alt_caps_toggle'"
 
 # change focus
 bindsym $mod+j focus left
@@ -116,7 +128,7 @@ bindsym $mod+Shift+Right move right
 
 # workspace back and forth (with/without active container)
 workspace_auto_back_and_forth no
-bindsym $mod+b workspace back_and_forth
+#bindsym $mod+b workspace back_and_forth
 bindsym $mod+Shift+b move container to workspace back_and_forth; workspace back_and_forth
 
 # split orientation
@@ -125,12 +137,12 @@ bindsym $mod+v split v;exec notify-send 'tile vertically'
 bindsym $mod+q split toggle
 
 # toggle fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+#bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+a layout tabbed
+bindsym $mod+p layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -142,7 +154,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+s sticky toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -203,7 +215,7 @@ assign [class="firefox|qutebrowser"] $ws1
 assign [class="code-oss|Emacs"] $ws2
 assign [class="Blender|gimp"] $ws3
 assign [class="Pcmanfm|ranger"] $ws4
-assign [class="URxvt"] $ws5
+assign [class="URxvt|Alacritty"] $ws5
 
 for_window[class=".*"] title_format "   %title"
 
@@ -235,8 +247,8 @@ for_window [class="Skype"] floating enable border normal
 for_window [class="Timeset-gui"] floating enable border normal
 for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
-for_window [class="code-oss"] floating enable
-for_window [class="Blender"] floating enable border pixel 2
+#for_window [class="code-oss"] floating enable
+for_window [class="FirstGameEngine"] floating enable border pixel 2
 
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
@@ -306,13 +318,14 @@ exec --no-startup-id clipit
 # exec --no-startup-id blueman-applet
 # exec_always --no-startup-id sbxkb
 exec --no-startup-id start_conky_maia
-# exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -time 10 -locker blurlock
+#exec --no-startup-id start_conky_green
+exec --no-startup-id xautolock -time 120 -locker blurlock
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
-#exec_always --no-startup-id ~/.i3/polybar.sh &
-#exec_always --no-startup-id killall polybar; /.config/polybar/launch.sh &
 
+#--------- Auto-timeout Off ----------#
+exec_always --no-startup-id "xset s off"
+exec_always --no-startup-id "xset -dpms"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -451,5 +464,4 @@ client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
 client.unfocused        #333333 #222222 #888888 #292d2e   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-
 client.background       #ffffff

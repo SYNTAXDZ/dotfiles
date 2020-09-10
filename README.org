@@ -1,0 +1,16 @@
+#+TITLE: My Personal Dotfiles
+
+* Config Dotfiles
+  Those files are configuration
+  for my favorite applications
+  on linux like i3wm, spacemacs...
+  
+** Usage
+   - Install i3wm gaps fork and copy the .i3 directory to your *home*.
+   - Install Polybar and awesome-fonts and copy polybar dir to your *home*.
+   - Install rofi and jgmenu to get an easy /launcher/ for your applications.
+   - Copy The the rest of dotfiles to *home* dir like .config and .Xresources...
+   
+*** Tips: to get the power-tray: 
+    go to power settings and activate power tray
+    from there

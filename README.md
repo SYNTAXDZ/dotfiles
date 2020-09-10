@@ -10,6 +10,8 @@ and replace the directory in home dir,
 in your system to get the nice cahracters in the panel
 - and install jgmenu/rofi to get a launcher
 for your applications.
+- to get the power-tray you have to go to the power settings
+and activate it from there (if you don't want to set one your self in polybar config)
 - and don't forget to replace the .Xresources
 file to get some effects.
 

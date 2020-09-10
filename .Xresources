@@ -6,7 +6,7 @@ Xft.autohint:  false
 Xft.hintstyle: hintslight
 Xft.lcdfilter: lcddefault
 
-XTerm*background:        #222D31
+XTerm*background:        [85]#222D31
 XTerm*foreground:        #d8d8d8
 XTerm*pointerColor:      #1ABB9B
 XTerm*faceName:          Fixed
@@ -54,7 +54,7 @@ XTerm*selectToClipboard: true
 *color7:                          #d8d8d8
 *color15:                         #f8f8f8
 
-Xcursor.theme: breeze_cursors
+Xcursor.theme: Adwaita
 Xcursor.size:                     0
 
 URxvt.font:                       9x15,xft:TerminessTTFNerdFontMono
@@ -85,20 +85,47 @@ URxvt.iso14755:                   false
 URxvt.keysym.Shift-Control-V:     eval:paste_clipboard
 URxvt.keysym.Shift-Control-C:     eval:selection_to_clipboard
 !Xterm escape codes, word by word movement
-URxvt.keysym.Control-Left:        \033[1;5D
+!!URxvt.keysym.Control-Left:        \033[1;5D
 URxvt.keysym.Shift-Control-Left:  \033[1;6D
-URxvt.keysym.Control-Right:       \033[1;5C
+!!URxvt.keysym.Control-Right:       \033[1;5C
 URxvt.keysym.Shift-Control-Right: \033[1;6C
-URxvt.keysym.Control-Up:          \033[1;5A
-URxvt.keysym.Shift-Control-Up:    \033[1;6A
-URxvt.keysym.Control-Down:        \033[1;5B
-URxvt.keysym.Shift-Control-Down:  \033[1;6B
-! Rxvt.perl-ext-common:             ...,clipboard
+!!URxvt.keysym.Control-Up:          command: \033[1;5A
+URxvt.keysym.Shift-Control-Up:    command: \033]720;1\007
+!!URxvt.keysym.Control-Down:        command: \033[1;5B
+URxvt.keysym.Shift-Control-Down:  command: \033]721;1\007
+
+
+!! Common Keybinds for Navigations
+URxvt.keysym.Shift-Up: command:\033]720;1\007
+URxvt.keysym.Shift-Down: command:\033]721;1\007
+URxvt.keysym.Control-Up: \033[1;5A
+URxvt.keysym.Control-Down: \033[1;5B
+URxvt.keysym.Control-Right: \033[1;5C
+URxvt.keysym.Control-Left: \033[1;5D
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.copyCommand: xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.urlLauncher: firefox
+URxvt.underlineURLs: true
+URxvt.urlButton: 1
+
+Rxvt.perl-ext-common:               default,matcher,resize-font,url-select,keyboard-select
 ! URxvt.keysym.M-C-c:               perl:clipboard:copy
 ! URxvt.keysym.M-v:                 perl:clipboard:paste
 ! URxvt.keysym.M-C-v:               perl:clipboard:paste_escaped
 ! URxvt*termName:                   string
-! URxvt*geometry:                   geometry
+URxvt*geometry:                   92x24
+URxvt*scrollColor: #777777
+URxvt*scrollstyle: plain
+URxvt*scrollTtyKeypress: true
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: false
 ! URxvt*chdir:                      string
 ! URxvt*loginShell:                 boolean
 ! URxvt*multiClickTime:             number
@@ -126,23 +153,23 @@ URxvt.keysym.Shift-Control-Down:  \033[1;6B
 ! URxvt*insecure:                   boolean
 ! URxvt*cursorUnderline:            boolean
 ! URxvt*pointerBlank:               boolean
-! URxvt*color0:                     color
-! URxvt*color1:                     color
-! URxvt*color2:                     color
-! URxvt*color3:                     color
-! URxvt*color4:                     color
-! URxvt*color5:                     color
-! URxvt*color6:                     color
-! URxvt*color7:                     color
-! URxvt*color8:                     color
-! URxvt*color9:                     color
-! URxvt*color10:                    color
-! URxvt*color11:                    color
-! URxvt*color12:                    color
-! URxvt*color13:                    color
-! URxvt*color14:                    color
-! URxvt*color15:                    color
-! URxvt*colorBD:                    color
+! URxvt*color0:                      $color0
+! URxvt*color1:                      $color1
+! URxvt*color2:                      $color2
+! URxvt*color3:                      $color3
+! URxvt*color4:                      $color4
+! URxvt*color5:                      $color5
+! URxvt*color6:                      $color6
+! URxvt*color7:                      $color7
+! URxvt*color8:                      $color8
+! URxvt*color9:                      $color9
+! URxvt*color10:                     $color10
+! URxvt*color11:                     $color11
+! URxvt*color12:                     $color12
+! URxvt*color13:                     $color13
+!URxvt*color14:                      $color14
+!URxvt*color15:                      $color15
+ !URxvt*colorBD:                    color
 ! URxvt*colorIT:                    color
 ! URxvt*colorUL:                    color
 ! URxvt*colorRV:                    color
@@ -159,6 +186,12 @@ URxvt.keysym.Shift-Control-Down:  \033[1;6B
 ! URxvt*iconFile:                   file
 URxvt*font:                         xft:DejaVu Mono:size=14
 URxvt*boldFont:                     xft:DejaVu Mono:bold:size=14
+!URxvt*font:                           xft:terminus:pixelsize:12
+!URxvt*boldFont:                       xft:terminus:bold:pixelsize:12
+!URxvt*italicFont:  xft:Bitstream Vera Sans Mono:italic:autohint=true:pixelsize=12
+!URxvt*boldItalicFont:  xft:Bitstream Vera Sans Mono:bold:italic:autohint=true:pixelsize=12
+URxvt*colorUL: yellow
+URxvt*underlineColor: yellow
 ! URxvt*italicFont:                 fontname
 ! URxvt*boldItalicFont:             fontname
 ! URxvt*intensityStyles:            boolean
@@ -236,3 +269,5 @@ URxvt*boldFont:                     xft:DejaVu Mono:bold:size=14
 ! -xos4-terminus-bold-r-normal--24-240-72-72-c-120-iso10646-1
 ! -xos4-terminus-bold-r-normal--28-280-72-72-c-140-iso10646-1
 ! -xos4-terminus-bold-r-normal--32-320-72-72-c-160-iso10646-1
+!
+rofi.fakeTranceparency: true
