@@ -35,8 +35,12 @@ height = 27
 ;offset-y = 1%
 ;radius = 6.0
 fixed-center = false
-;top = true
-bottom = true
+top = true
+override-redirect = true
+wm-restack = bspwm
+;bottom = true
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
 
 ;background = ${colors.background}
 background = #aa2F343F
@@ -45,8 +49,8 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 2
-border-color = #00000000
+;border-size = 2
+;border-color = #00000000
 
 padding-left = 0
 padding-right = 2
@@ -60,29 +64,129 @@ font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=14;3"
 font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=14;3"
 font-4 = "Font Awesome 5 Brands:pixelsize=14;3"
 
-modules-left = jgmenu i3
+;modules-left = jgmenu i3
+modules-left = i3 bspwm workspaces
 modules-center = date
 ;modules-center = xwindow
 ;modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
 ;modules-right = xkeyboard battery
-modules-right = xkeyboard
+modules-right = xkeyboard battery
 
 tray-position = right
 tray-padding = 2
 ;tray-background = #0063ff
 
-wm-restack = i3
+;wm-restack = i3
+;wm-restack = bspwm
 
 ;override-redirect = true
 
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
+cursor-click = pointer
+cursor-scroll = ns-resize
 
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
+
+[module/bspwm]
+type = internal/bspwm
+
+; Only show workspaces defined on the same output as the bar
+; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+; But if you rename your bspwm monitors with bspc -n this option will no longer
+; behave correctly.
+; Default: true
+pin-workspaces = true
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+; Output mode flags after focused state label
+; Default: false
+inline-mode = true
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = true
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Set the scroll cycle direction 
+; Default: true
+reverse-scroll = false
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-background = ${colors.background-alt}
+label-visible-underline = ${colors.primary}
+label-visible-padding = 2
+
+ws-icon-0 = 1;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+;ws-icon-5 = 6;
+;ws-icon-6 = 7; 
+;ws-icon-7 = 8;
+;ws-icon-8 = 9;
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index% %icon%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
+
+[module/workspaces]
+type = internal/bspwm
+enable-click = true
+enable-scroll = false
+strip-wsnumbers = true
+format =  
+pin-workspaces = true
+
+ws-icon-0 = 1; 
+ws-icon-1 = 2;
+ws-icon-2 = 3;♪
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+;ws-icon-5 = 6;
+;ws-icon-6 = 7;
+;ws-icon-9 = 10;
+
+label-focused = %name%
+label-focused-padding = 2
+label-focused-margin = 0.5
+label-focused-foreground = ${colors.white}
+label-focused-underline = ${colors.white}
+
+label-unfocused = %name%
+label-unfocused-padding = 2
+label-unfocused-margin = 0.5
+label-unfocused-underline = ${colors.l_gray}
+label-visible-padding = 2
+label-visible-margin = 0.5
+
+label-urgent = %name%
+label-urgent-padding = 2
+label-urgent-margin = 0.5
+label-urgent-foreground = ${colors.red}
+label-urgent-underline = ${colors.red}
 
 #------------------------------ Center modules -------------------------------#
 [module/xwindow]
@@ -94,8 +198,17 @@ label = %{T2}%title:0:40:...%%{T-}
 [module/jgmenu]
 type = custom/text
 content-padding = 2
+;exec = echo "Manjaro" 
 content = ""
 click-left = "jgmenu_run >/dev/null 2>&1 &"
+;click-left = "morc_menu &"
+
+[module/conky]
+type = custom/text
+;content-padding = 2
+;exec = conky & 
+content = ""
+click-left = "conky -o >/dev/null 2>&1 &"
 ;click-left = "morc_menu &"
 
 [module/xkeyboard]
@@ -155,10 +268,10 @@ label-visible-padding = ${self.label-focused-padding}
 ws-icon-0 = 1;
 ws-icon-1 = 2;
 ws-icon-2 = 3;
-ws-icon-3 = 4;
+ws-icon-3 = 4;
 ws-icon-4 = 5;
 ws-icon-5 = 6;
-ws-icon-6 = 7;
+ws-icon-6 = 7; 
 ws-icon-7 = 8;
 ws-icon-8 = 9;
 
