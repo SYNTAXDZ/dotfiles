@@ -39,12 +39,12 @@ top = true
 override-redirect = true
 wm-restack = bspwm
 ;bottom = true
-;scroll-up = bspwm-desknext
-;scroll-down = bspwm-deskprev
 
 ;background = ${colors.background}
 background = #aa2F343F
 foreground = ${colors.foreground}
+
+;enable-ipc = true
 
 line-size = 3
 line-color = #f00
@@ -58,19 +58,19 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = "DejaVu Sans:style=Bold:pixelsize=14;3"
-font-1 = "DejaVu Sans:pixelsize=14;3"
-font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=14;3"
-font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=14;3"
-font-4 = "Font Awesome 5 Brands:pixelsize=14;3"
+font-0 = "DejaVu Sans:style=Bold:pixelsize=12;3"
+font-1 = "DejaVu Sans:pixelsize=12;3"
+font-2 = "Font Awesome 5 Free:style=Solid:pixelsize=12;3"
+font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=12;3"
+font-4 = "Font Awesome 5 Brands:pixelsize=12;3"
 
 ;modules-left = jgmenu i3
-modules-left = i3 bspwm workspaces
+modules-left = i3 bspwm
 modules-center = date
 ;modules-center = xwindow
 ;modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
 ;modules-right = xkeyboard battery
-modules-right = xkeyboard battery
+modules-right = xkeyboard 
 
 tray-position = right
 tray-padding = 2
@@ -93,14 +93,14 @@ type = internal/bspwm
 ; But if you rename your bspwm monitors with bspc -n this option will no longer
 ; behave correctly.
 ; Default: true
-pin-workspaces = true
+pin-workspaces = false
 
 cursor-click = pointer
 cursor-scroll = ns-resize
 
 ; Output mode flags after focused state label
 ; Default: false
-inline-mode = true
+inline-mode = false
 
 ; Create click handler used to focus workspace
 ; Default: true
@@ -114,6 +114,8 @@ enable-scroll = false
 ; Default: true
 reverse-scroll = false
 
+;format = <label-state> <label-mode>
+
 ; focused = Active workspace on focused monitor
 label-focused = %icon%
 label-focused-background = ${colors.background-alt}
@@ -122,6 +124,8 @@ label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %icon%
+label-unfocused-background = ${colors.background-alt}
+label-unfocused-underline = ${colors.primary}
 label-unfocused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
@@ -141,7 +145,7 @@ ws-icon-4 = 5;
 ;ws-icon-8 = 9;
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %index% %icon%
+label-urgent = %icon%
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
@@ -150,7 +154,7 @@ label-urgent-padding = 2
 ; Example: code;♚ will apply the icon to all workspaces 
 ; containing 'code' in the label
 ; Default: false
-fuzzy-match = true
+fuzzy-match = false
 
 [module/workspaces]
 type = internal/bspwm

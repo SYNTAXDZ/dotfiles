@@ -2,12 +2,23 @@
 
 nitrogen --restore &
 picom -b &
+nm-applet > /dev/null &
+xfce4-power-manager > /dev/null &
 $HOME/.config/bspwm/run_sxhkd.sh &
 $HOME/.config/polybar/launch.sh &
 $HOME/.config/bspwm/volume_tray.sh &
+#start_conky_maia &
 
 bspc monitor -d 1 2 3 4 5
 
+BW=-5
+#bspc config border_width $BW
+#bspc config window_gap -$BW
+for side in right bottom left ; do
+	bspc config ${side}_padding $BW
+done
+
+bspc config top_padding 	20
 bspc config border_width         2
 bspc config window_gap          10
 
