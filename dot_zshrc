@@ -347,7 +347,8 @@ ex ()
 
 # reporting tools - install when not installed
 # install neofetch
-neofetch
+#neofetch
+macchina
 # install screenfetch
 #screenfetch
 # install ufetch-git
@@ -393,6 +394,8 @@ elif [[ -f /etc/DIR_COLORS ]] ; then
     eval $(dircolors -b /etc/DIR_COLORS)
 fi
 
-export GHDL_PREFIX="/home/syntax/Base/Apps/fpga-toolchain/lib/ghdl"
-export PATH="/home/syntax/Base/Apps/fpga-toolchain/bin:$PATH"
+export GHDL_YOSYS_PLUGIN=/home/syntax/Base/Apps/ghdl-yosys-plugin/ghdl.so
+#source /opt/Xilinx/14.7/ISE_DS/settings64.sh
+#export GHDL_PREFIX="/home/syntax/Base/Apps/fpga-toolchain/lib/ghdl"
+#export PATH="/home/syntax/Base/Apps/fpga-toolchain/bin:$PATH"
 #export PATH=/opt/microchip/xc8/v1.34/bin:$PATH
